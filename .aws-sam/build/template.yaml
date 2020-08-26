@@ -5,7 +5,7 @@ Description: 'Sample SAM Template for check-content
   '
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 20
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
@@ -15,7 +15,8 @@ Resources:
       Runtime: dotnetcore3.1
       Environment:
         Variables:
-          PARAM1: VALUE
+          WEBSITE_URL: https://chrome.google.com/webstore/detail/jira-issue-template-gener/eiipndahbfgdfnhbdkbgeaabonlbfcmg
+          SSM_PARAMETER_KEY: EXTENSION_DOWNLOAD_COUNT
       Events:
         HelloWorld:
           Type: Api

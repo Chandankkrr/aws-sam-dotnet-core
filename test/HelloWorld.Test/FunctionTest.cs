@@ -10,24 +10,24 @@ using Amazon.Lambda.APIGatewayEvents;
 
 namespace HelloWorld.Tests
 {
-  public class FunctionTest
-  {
-    private static readonly HttpClient client = new HttpClient();
-
-    private static async Task<string> GetCallingIP()
+    public class FunctionTest
     {
+        private static readonly HttpClient client = new HttpClient();
+
+        private static async Task<string> GetCallingIP()
+        {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Add("User-Agent", "AWS Lambda .Net Client");
 
-            var stringTask = client.GetStringAsync("http://checkip.amazonaws.com/").ConfigureAwait(continueOnCapturedContext:false);
+            var stringTask = client.GetStringAsync("http://checkip.amazonaws.com/").ConfigureAwait(continueOnCapturedContext: false);
 
             var msg = await stringTask;
-            return msg.Replace("\n","");
-    }
+            return msg.Replace("\n", "");
+        }
 
-    [Fact]
-    public async Task TestHelloWorldFunctionHandler()
-    {
+        [Fact]
+        public async Task TestHelloWorldFunctionHandler()
+        {
             var request = new APIGatewayProxyRequest();
             var context = new TestLambdaContext();
             string location = GetCallingIP().Result;
@@ -53,6 +53,6 @@ namespace HelloWorld.Tests
             Assert.Equal(expectedResponse.Body, response.Body);
             Assert.Equal(expectedResponse.Headers, response.Headers);
             Assert.Equal(expectedResponse.StatusCode, response.StatusCode);
+        }
     }
-  }
 }

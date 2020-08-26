@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "Sample SAM Template for check-content\n"
+Globals:
+  Function:
+    Timeout: 20
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-1gwfoe488eaa2/3c177c489df4b981499aa1b11cb5edf4
+      Handler: HelloWorld::HelloWorld.Function::FunctionHandler
+      Runtime: dotnetcore3.1
+      Environment:
+        Variables:
+          WEBSITE_URL: https://chrome.google.com/webstore/detail/jira-issue-template-gener/eiipndahbfgdfnhbdkbgeaabonlbfcmg
+          SSM_PARAMETER_KEY: EXTENSION_DOWNLOAD_COUNT
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+    Role:
+      Fn::GetAtt: ["CreateContentLambdaExecutionRole", "Arn"]
+    DependsOn: CreateContentLambdaExecutionRole
+  CreateContentSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: Extension Download Notification
+      TopicName: ExtensionDownloadNotification
+      Subscription:
+        - Endpoint: chandankkrr@gmail.com
+          Protocol: email
+  # CreateContentSSMParameter:
+  #   Type: AWS::SSM::Parameter
+  #   Properties:
+  #     Name: EXTENSION_DOWNLOAD_COUNT
+  #     Type: String
+  #     Value: 0
+  #     Description: SSM Parameter for Extension download count.
+  CreateContentLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+      - PolicyName: CreateContentLambdaExecutionRole
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - ssm:GetParameter*
+            - ssm:PutParameter*
+            Resource:
+              Fn::Sub: arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:!Ref CreateContentSNSTopic
+          - Effect: Allow
+            Action:
+            - sns:CreateTopic
+            - sns:Publish
+            Resource:
+              Fn::Sub: arn:aws:sns:${AWS::Region}:${AWS::AccountId}:parameter/EXTENSION_DOWNLOAD_COUNT
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn

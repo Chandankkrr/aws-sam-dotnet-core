@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "Sample SAM Template for check-content\n"
+Resources:
+  CreateContentSSMParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: EXTENSION_DOWNLOAD_COUNT1
+      Type: String
+      Value: 0
+      Description: SSM Parameter for Extension download count.

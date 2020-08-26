@@ -6,7 +6,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 20
 
 Resources:
   HelloWorldFunction:
@@ -17,7 +17,8 @@ Resources:
       Runtime: dotnetcore3.1
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          WEBSITE_URL: https://chrome.google.com/webstore/detail/jira-issue-template-gener/eiipndahbfgdfnhbdkbgeaabonlbfcmg
+          SSM_PARAMETER_KEY: EXTENSION_DOWNLOAD_COUNT
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

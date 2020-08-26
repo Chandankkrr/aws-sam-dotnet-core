@@ -9,6 +9,8 @@
     ".NETCoreApp,Version=v3.1/linux-x64": {
       "HelloWorld/1.0.0": {
         "dependencies": {
+          "AWSSDK.SimpleNotificationService": "3.5.0",
+          "AWSSDK.SimpleSystemsManagement": "3.5.0",
           "Amazon.Lambda.APIGatewayEvents": "1.2.0",
           "Amazon.Lambda.Core": "1.1.0",
           "Amazon.Lambda.Serialization.Json": "1.5.0",
@@ -49,6 +51,36 @@
           }
         }
       },
+      "AWSSDK.Core/3.5.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      },
+      "AWSSDK.SimpleNotificationService/3.5.0": {
+        "dependencies": {
+          "AWSSDK.Core": "3.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SimpleNotificationService.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      },
+      "AWSSDK.SimpleSystemsManagement/3.5.0": {
+        "dependencies": {
+          "AWSSDK.Core": "3.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SimpleSystemsManagement.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      },
       "Newtonsoft.Json/12.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -85,6 +117,27 @@
       "sha512": "sha512-Y1F/m+yKUcTLFgZrX8rvgq2m9d0ebnHtJu2gziTdi+7m1VqSO1BLngNDm/gNMEiL0fzbiygsCcg6T3/r1NnDFQ==",
       "path": "amazon.lambda.serialization.json/1.5.0",
       "hashPath": "amazon.lambda.serialization.json.1.5.0.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bC5slbW3f1QgYlJK/I/zDUlixHq8YzktTwreJHwoOCpnRFB/IHV4EIgdEGwQnWOneJwRfwq4ZB0OhlrM3aT2pw==",
+      "path": "awssdk.core/3.5.0",
+      "hashPath": "awssdk.core.3.5.0.nupkg.sha512"
+    },
+    "AWSSDK.SimpleNotificationService/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-18FUTgaRitsnkT8HQwlJ88fUD2pq2RtLRL5keZajIKhjMutmoYRb3L+1rZO4/tjE6jvIxZuUHh0dB/A0PhK9rA==",
+      "path": "awssdk.simplenotificationservice/3.5.0",
+      "hashPath": "awssdk.simplenotificationservice.3.5.0.nupkg.sha512"
+    },
+    "AWSSDK.SimpleSystemsManagement/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NKh0Z9XxwCSzFQiVXP5r3zZt2mn7nOsk9riK20JsL34FvAkqkPvHVXw+BHNG+s5FpdV/phFdcRIrPHl9Qth86g==",
+      "path": "awssdk.simplesystemsmanagement/3.5.0",
+      "hashPath": "awssdk.simplesystemsmanagement.3.5.0.nupkg.sha512"
     },
     "Newtonsoft.Json/12.0.1": {
       "type": "package",
